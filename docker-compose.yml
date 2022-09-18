@@ -12,7 +12,20 @@ services:
     environment:
       TZ: Asia/Tokyo
     command: yarn serve
-
+  api:
+    container_name: api_container
+    build: ./docker/api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/api
+    tty: true
+    environment:
+      CHOKIDAR_USEPOLLING: 1
+      TZ: Asia/Tokyo
+    depends_on:
+      - db
+    command: yarn nodemon
   db:
     container_name: db_container
     build: ./docker/db

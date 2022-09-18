@@ -1,8 +1,11 @@
-CREATE DATABASE IF NOT EXISTS test_db;
+DROP DATABASE IF EXISTS test_db;
+CREATE DATABASE test_db;
 
 USE test_db;
 
-CREATE TABLE IF NOT EXISTS test (
+DROP TABLE IF EXISTS test;
+
+CREATE TABLE test (
   id int NOT NULL AUTO_INCREMENT primary key,
   name varchar(30),
   description varchar(255)
