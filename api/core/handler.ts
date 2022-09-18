@@ -14,8 +14,6 @@ export class Handler {
         this.res.json({ data: data })
     }
 
-
-
     /**
      * エラーの送信
      */
