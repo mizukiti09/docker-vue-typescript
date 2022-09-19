@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 import { Handler } from '../../core/handler'
+import { NO_DATA_EXISTS } from '../../constants/error'
+import { Test } from '../../models/index'
 
 export class GetTests {
     handler: Handler
@@ -14,6 +16,9 @@ export class GetTests {
     async main() {
         const data = this.getTests()
 
+        if (!data) {
+            return this.handler.error(NO_DATA_EXISTS)
+        }
         return this.handler.json(data)
     }
 
@@ -21,8 +26,8 @@ export class GetTests {
      * メッセージを返す
      */
     getTests() {
-        const message = 'get_tests実行'
-
-        return message
+        return Test.findAll({
+            attributes: ['id', 'name', 'description'],
+        })
     }
 }
